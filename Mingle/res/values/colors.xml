@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="background">#FFEC6010</color>
+	<color name="murmurs_background">#FFF2F2F2</color>
+	<color name="text">#FFFFFFFF</color>
+</resources>

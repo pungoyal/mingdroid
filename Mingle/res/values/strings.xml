@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, Murmurs!</string>
+	<string name="app_name">Minmurs</string>
+	<string name="main_title">Murmurs from Mingle</string>
+	<string name="view_label">Murmurs</string>
+	<string name="about_label">About</string>
+	<string name="exit_label">Exit</string>
+
+	<string name="settings_label">Settings...</string>
+	<string name="settings_title">Minmurs settings</string>
+	<string name="settings_shortcut">s</string>
+	<string name="change_project_label">Project</string>
+	<string name="change_project_title">Project</string>
+	<string name="change_project_shortcut">p</string>
+
+	<string name="connection_key">connection</string>
+	<string name="connection_title">Connection</string>
+	<string name="connection_summary">Connection related preferences</string>
+	<string name="project_prefs_key">project_prefs</string>
+	<string name="project_prefs_title">Project</string>
+	<string name="project_prefs_summary">Project related preferences</string>
+
+	<string name="user_key">user</string>
+	<string name="user_title">Username</string>
+	<string name="user_summary">Your username</string>
+	<string name="password_key">password</string>
+	<string name="password_title">Password</string>
+	<string name="password_summary">What you enter to log in</string>
+	<string name="server_key">server</string>
+	<string name="server_title">Server</string>
+	<string name="server_summary">Where Mingle is hosted</string>
+	<string name="project_key">project</string>
+	<string name="project_title">Project</string>
+	<string name="project_summary">Project you want to connect to</string>
+
+	<string name="murmurs_list_title">Murmurs</string>
+	<string name="empty">No murmurs. Go murmur some!</string>
+
+	<string name="about_title">About Mingle Murmurs</string>
+	<string name="about_text">
+		\
+		Mingle is a ground breaking agile project
+		management tool from ThoughtWorks Studios.
+
+		This app connects to your
+		mingle instance to
+		see what the people have been
+		murmuring about.
+	</string>
+</resources>
