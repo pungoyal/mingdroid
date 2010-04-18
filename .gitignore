@@ -1,0 +1,4 @@
+Mingle/bin/*
+MingleTest/bin/*
+*DS_Store
+.metadata/*

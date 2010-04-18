@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:key="@string/project_prefs_key"
+		android:title="@string/project_prefs_title" android:summary="@string/project_prefs_summary">
+		<ListPreference android:key="@string/project_key"
+			android:title="@string/project_title" android:summary="@string/project_summary"
+			android:entries="@array/project_names" android:entryValues="@array/project_ids" />
+	</PreferenceCategory>
+</PreferenceScreen>
