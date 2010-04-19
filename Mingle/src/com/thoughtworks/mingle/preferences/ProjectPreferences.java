@@ -1,7 +1,5 @@
 package com.thoughtworks.mingle.preferences;
 
-import java.io.IOException;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -32,14 +30,9 @@ public class ProjectPreferences extends PreferenceActivity {
 		projectPreference.setOnPreferenceChangeListener(new PreferenceChangeListener(this));
 
 		MingleClient mingleClient = new MingleClient(ProjectPreferences.this);
-		try {
-			Projects projects = mingleClient.getProjects();
-			projectPreference.setEntries(projects.names());
-			projectPreference.setEntryValues(projects.ids());
-		} catch (IOException e) {
-			Toast.makeText(ProjectPreferences.this, "Server cannot be reached. Try again!", Toast.LENGTH_LONG).show();
-			return;
-		}
+		Projects projects = mingleClient.getProjects();
+		projectPreference.setEntries(projects.names());
+		projectPreference.setEntryValues(projects.ids());
 
 		SharedPreferences preferences = getSharedPreferences(Constants.APPLICATION_KEY, 0);
 		String server = preferences.getString(Constants.SERVER_KEY, "NOT DEFINED!");
@@ -55,7 +48,7 @@ public class ProjectPreferences extends PreferenceActivity {
 		connectionProperties += "\nPassword - " + password;
 		connectionProperties += "\nProject - " + project;
 
-		Toast toast = Toast.makeText(this, connectionProperties, Toast.LENGTH_LONG);
+		Toast toast = Toast.makeText(this, connectionProperties, Toast.LENGTH_SHORT);
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
 

@@ -12,4 +12,5 @@ public class MurmursActivity extends ListActivity {
 		setContentView(R.layout.murmurs);
 
 		setListAdapter(new MurmurAdapter(this));
-	}}
+	}
+}
