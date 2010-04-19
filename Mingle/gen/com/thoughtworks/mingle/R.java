@@ -24,12 +24,13 @@ public final class R {
         public static final int mingle_icon=0x7f020001;
     }
     public static final class id {
-        public static final int about_button=0x7f090002;
+        public static final int about_button=0x7f090003;
         public static final int about_content=0x7f090000;
-        public static final int change_project=0x7f090005;
-        public static final int exit_button=0x7f090003;
-        public static final int settings=0x7f090004;
-        public static final int view_button=0x7f090001;
+        public static final int card_button=0x7f090001;
+        public static final int change_project=0x7f090006;
+        public static final int exit_button=0x7f090004;
+        public static final int murmurs_button=0x7f090002;
+        public static final int settings=0x7f090005;
     }
     public static final class layout {
         public static final int about=0x7f030000;
@@ -41,22 +42,24 @@ public final class R {
     }
     public static final class string {
         public static final int about_label=0x7f070005;
-        public static final int about_text=0x7f070028;
-        public static final int about_title=0x7f070027;
-        public static final int app_name=0x7f070002;
+        public static final int about_text=0x7f070029;
+        public static final int about_title=0x7f070028;
+        public static final int app_name=0x7f070001;
+        public static final int card_label=0x7f070003;
+        public static final int card_page_title=0x7f070026;
         public static final int change_project_label=0x7f07000a;
         public static final int change_project_shortcut=0x7f07000c;
         public static final int change_project_title=0x7f07000b;
         public static final int connection_key=0x7f07000d;
         public static final int connection_summary=0x7f07000f;
         public static final int connection_title=0x7f07000e;
-        public static final int empty=0x7f070026;
+        public static final int empty=0x7f070027;
         public static final int exit_label=0x7f070006;
-        public static final int hello=0x7f070001;
         public static final int https_key=0x7f070013;
         public static final int https_summary=0x7f070015;
         public static final int https_title=0x7f070014;
-        public static final int main_title=0x7f070003;
+        public static final int main_title=0x7f070002;
+        public static final int murmurs_label=0x7f070004;
         public static final int murmurs_list_title=0x7f070025;
         public static final int password_key=0x7f070019;
         public static final int password_summary=0x7f07001b;
@@ -80,7 +83,6 @@ public final class R {
         public static final int user_key=0x7f070016;
         public static final int user_summary=0x7f070018;
         public static final int user_title=0x7f070017;
-        public static final int view_label=0x7f070004;
     }
     public static final class xml {
         public static final int project_settings=0x7f040000;

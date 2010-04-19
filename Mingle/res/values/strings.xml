@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Murmurs!</string>
-	<string name="app_name">Minmurs</string>
-	<string name="main_title">Murmurs from Mingle</string>
-	<string name="view_label">Murmurs</string>
+	<string name="app_name">Mindroid</string>
+	<string name="main_title">Thoughtworks Mingle</string>
+	<string name="card_label">View a card</string>
+	<string name="murmurs_label">Murmurs</string>
 	<string name="about_label">About</string>
 	<string name="exit_label">Exit</string>
 
@@ -41,6 +41,7 @@
 	<string name="project_summary">Project you want to connect to</string>
 
 	<string name="murmurs_list_title">Murmurs</string>
+	<string name="card_page_title">Viewing a card</string>
 	<string name="empty">No murmurs. Go murmur some!</string>
 
 	<string name="about_title">About Mingle Murmurs</string>

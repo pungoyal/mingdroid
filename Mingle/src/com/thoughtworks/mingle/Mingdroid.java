@@ -12,16 +12,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class MingleMurmurs extends Activity {
+public class Mingdroid extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		View viewMurmursButton = findViewById(R.id.view_button);
+		View cardButton = findViewById(R.id.card_button);
+		cardButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(Mingdroid.this, CardActivity.class);
+				startActivity(intent);
+			}
+		});
+
+		View viewMurmursButton = findViewById(R.id.murmurs_button);
 		viewMurmursButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(MingleMurmurs.this, MurmursActivity.class);
+				Intent intent = new Intent(Mingdroid.this, MurmursActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -29,7 +37,7 @@ public class MingleMurmurs extends Activity {
 		View aboutButton = findViewById(R.id.about_button);
 		aboutButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				startActivity(new Intent(MingleMurmurs.this, About.class));
+				startActivity(new Intent(Mingdroid.this, About.class));
 			}
 		});
 
@@ -61,5 +69,4 @@ public class MingleMurmurs extends Activity {
 		}
 		return false;
 	}
-
 }

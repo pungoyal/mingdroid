@@ -2,12 +2,12 @@ package com.thoughtworks.mingle;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.thoughtworks.mingle.MingleMurmurs;
+import com.thoughtworks.mingle.Mingdroid;
 
-public class MingleTest extends ActivityInstrumentationTestCase2<MingleMurmurs> {
+public class MingleTest extends ActivityInstrumentationTestCase2<Mingdroid> {
 
-	public MingleTest(String pkg, Class<MingleMurmurs> activityClass) {
-		super("com.thoughtworks.mingle", MingleMurmurs.class);
+	public MingleTest(String pkg, Class<Mingdroid> activityClass) {
+		super("com.thoughtworks.mingle", Mingdroid.class);
 		// TODO Auto-generated constructor stub
 	}
 
