@@ -97,7 +97,7 @@ public class MingleClient {
 
 		URL u = new URL(constructURL(apiSlug));
 		HttpURLConnection connection = (HttpURLConnection) u.openConnection();
-		connection.setConnectTimeout(3000);
+		connection.setConnectTimeout(5000);
 		connection.setReadTimeout(5000);
 
 		String encode = base64Encoder.encode((username + ":" + password).getBytes());
