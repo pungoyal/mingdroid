@@ -33,6 +33,9 @@
 	<string name="server_key">server</string>
 	<string name="server_title">Server</string>
 	<string name="server_summary">Where Mingle is hosted</string>
+	<string name="port_key">port</string>
+	<string name="port_title">Mingle port</string>
+	<string name="port_summary">Leave blank if you do\'nt know</string>
 	<string name="project_key">project</string>
 	<string name="project_title">Project</string>
 	<string name="project_summary">Project you want to connect to</string>

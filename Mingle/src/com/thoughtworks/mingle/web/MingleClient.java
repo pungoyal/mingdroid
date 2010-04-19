@@ -1,25 +1,15 @@
 package com.thoughtworks.mingle.web;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.UnknownHostException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpResponseException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.util.EntityUtils;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.thoughtworks.mingle.Constants;
 import com.thoughtworks.mingle.converters.AuthorConverter;
@@ -33,42 +23,37 @@ import com.thoughtworks.mingle.domain.Murmurs;
 import com.thoughtworks.mingle.domain.Project;
 import com.thoughtworks.mingle.domain.Projects;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.Base64Encoder;
 
 public class MingleClient {
+	private final XStream xstream;
+	private final Base64Encoder base64Encoder;
 
-	private DefaultHttpClient client;
-	private XStream xstream;
 	private String server;
 	private String project;
-	private final Context context;
 	private String protocol;
+	private String username;
+	private String password;
+	private String port;
 
 	public MingleClient(Context context) {
-		this.context = context;
-		SharedPreferences preferences = context.getSharedPreferences(Constants.APPLICATION_KEY, 0);
+		base64Encoder = new Base64Encoder();
 
-		String username = preferences.getString(Constants.USERNAME_KEY, "puneet");
-		String password = preferences.getString(Constants.PASSWORD_KEY, "puneet");
+		SharedPreferences preferences = context.getSharedPreferences(Constants.APPLICATION_KEY, 0);
+		username = preferences.getString(Constants.USERNAME_KEY, "puneet");
+		password = preferences.getString(Constants.PASSWORD_KEY, "puneet");
 		server = preferences.getString(Constants.SERVER_KEY, "10.0.2.2");
 		project = preferences.getString(Constants.PROJECT_KEY, "mxl");
-		protocol = preferences.getString(Constants.HTTPS_KEY, "http://");
+		protocol = preferences.getString(Constants.HTTPS_KEY, "http");
+		port = preferences.getString(Constants.PORT_KEY, "");
 
-		HttpParams httpParameters = new BasicHttpParams();
-		HttpConnectionParams.setConnectionTimeout(httpParameters, 3000);
-		HttpConnectionParams.setSoTimeout(httpParameters, 5000);
-
-		client = new DefaultHttpClient(httpParameters);
-		client.getCredentialsProvider().setCredentials(new AuthScope(null, -1),
-				new UsernamePasswordCredentials(username, password));
 		xstream = new XStream();
 	}
 
 	public Projects getProjects() throws IOException {
 		checkAlive();
 
-		String url = protocol + server + ":8080/api/v2/projects.xml";
-
-		String response = getResponseXML(url);
+		String response = getResponseXML("/api/v2/projects.xml");
 		if ("".equals(response))
 			return new Projects();
 
@@ -81,9 +66,12 @@ public class MingleClient {
 	}
 
 	public Murmurs getMurmurs() {
-		String url = protocol + server + ":8080/api/v2/projects/" + project + "/murmurs.xml";
-
-		String response = getResponseXML(url);
+		String response = "";
+		try {
+			response = getResponseXML("/api/v2/projects/" + project + "/murmurs.xml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		if ("".equals(response))
 			return new Murmurs();
 
@@ -98,40 +86,44 @@ public class MingleClient {
 	}
 
 	public boolean checkAlive() throws IOException {
-
-		HttpGet request = createRequest(protocol + server + ":8080/");
-		client.execute(request);
-		releaseConnections();
+		getResponseXML("/");
 		return true;
 	}
 
-	private String getResponseXML(String url) {
-		HttpGet request = createRequest(url);
-		String response = "";
-		try {
-			HttpResponse r = client.execute(request);
-			response = EntityUtils.toString(r.getEntity());
-			releaseConnections();
-		} catch (HttpResponseException e) {
-			Toast.makeText(context, "HTTP response problem", Toast.LENGTH_LONG).show();
-		} catch (UnknownHostException e) {
-			Toast.makeText(context, "Unknown server - " + server, Toast.LENGTH_LONG).show();
-		} catch (ClientProtocolException e) {
-			Toast.makeText(context, "Client protocol exception", Toast.LENGTH_LONG).show();
-		} catch (IOException e) {
-			e.printStackTrace();
+	private String getResponseXML(String apiSlug) throws IOException {
+		Log.v(Constants.APPLICATION_KEY, apiSlug);
+
+		StringBuffer buffer = new StringBuffer();
+
+		URL u = new URL(constructURL(apiSlug));
+		HttpURLConnection connection = (HttpURLConnection) u.openConnection();
+		connection.setConnectTimeout(3000);
+		connection.setReadTimeout(5000);
+
+		String encode = base64Encoder.encode((username + ":" + password).getBytes());
+		connection.addRequestProperty("Authorization", "Basic " + encode);
+		connection.connect();
+
+		InputStream inputStream = connection.getInputStream();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+		String line = null;
+		String line_separator = System.getProperty("line.separator");
+		while ((line = reader.readLine()) != null) {
+			buffer.append(line + line_separator);
 		}
-		return response;
+
+		connection.disconnect();
+		return buffer.toString();
 	}
 
-	private void releaseConnections() {
-		ClientConnectionManager connectionManager = client.getConnectionManager();
-		connectionManager.closeExpiredConnections();
-	}
+	private String constructURL(String apiSlug) {
+		String urlString = protocol + "://" + server;
 
-	private HttpGet createRequest(String url) {
-		Log.v(Constants.APPLICATION_KEY, url);
-		HttpGet request = new HttpGet(url);
-		return request;
+		if (port.length() != 0)
+			urlString += (":" + port);
+
+		urlString += apiSlug;
+		return urlString;
 	}
 }

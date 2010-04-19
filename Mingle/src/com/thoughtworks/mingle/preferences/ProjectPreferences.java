@@ -43,12 +43,14 @@ public class ProjectPreferences extends PreferenceActivity {
 
 		SharedPreferences preferences = getSharedPreferences(Constants.APPLICATION_KEY, 0);
 		String server = preferences.getString(Constants.SERVER_KEY, "NOT DEFINED!");
+		String port = preferences.getString(Constants.PORT_KEY, "<default>");
 		String username = preferences.getString(Constants.USERNAME_KEY, "NOT DEFINED!");
 		String password = preferences.getString(Constants.PASSWORD_KEY, "NOT DEFINED!");
 		String project = preferences.getString(Constants.PROJECT_KEY, "NOT SELECTED!");
 
 		String connectionProperties = "Current connection properties:";
 		connectionProperties += "\nServer - " + server;
+		connectionProperties += "\nPort - " + port;
 		connectionProperties += "\nUsername - " + username;
 		connectionProperties += "\nPassword - " + password;
 		connectionProperties += "\nProject - " + project;

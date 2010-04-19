@@ -20,14 +20,13 @@ public class ConnectionPreferences extends PreferenceActivity {
 		findPreference(Constants.HTTPS_KEY).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				Editor editor = getSharedPreferences(Constants.APPLICATION_KEY, 0).edit();
-				Boolean https = (Boolean) newValue;
-
-				String protocol = https ? "https://" : "http://";
+				String protocol = (Boolean) newValue ? "https" : "http";
 				editor.putString(preference.getKey(), protocol);
 				return editor.commit();
 			}
 		});
 		findPreference(Constants.SERVER_KEY).setOnPreferenceChangeListener(preferenceChangeListener);
+		findPreference(Constants.PORT_KEY).setOnPreferenceChangeListener(preferenceChangeListener);
 		findPreference(Constants.USERNAME_KEY).setOnPreferenceChangeListener(preferenceChangeListener);
 		findPreference(Constants.PASSWORD_KEY).setOnPreferenceChangeListener(preferenceChangeListener);
 	}

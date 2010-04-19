@@ -10,5 +10,7 @@
 			android:title="@string/password_title" android:summary="@string/password_summary" />
 		<EditTextPreference android:key="@string/server_key"
 			android:title="@string/server_title" android:summary="@string/server_summary" />
+		<EditTextPreference android:key="@string/port_key"
+			android:title="@string/port_title" android:summary="@string/port_summary" />
 	</PreferenceCategory>
 </PreferenceScreen>
