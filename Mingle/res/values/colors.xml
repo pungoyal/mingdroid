@@ -3,4 +3,13 @@
 	<color name="background">#FFEC6010</color>
 	<color name="murmurs_background">#FFF2F2F2</color>
 	<color name="text">#FFFFFFFF</color>
+
+	<color name="card_background">#FFFFFFFF</color>
+	<color name="card_title">#FF660000</color>
+	<color name="card_description">#FF000000</color>
+	<color name="card_number">#FF666666</color>
+	<color name="card_property">#FF666666</color>
+	<color name="card_property_value">#FF660000</color>
+	<color name="card_header_background">#FFFFF2E5</color>
+	<color name="card_properties_background">#FFFFFAF6</color>
 </resources>

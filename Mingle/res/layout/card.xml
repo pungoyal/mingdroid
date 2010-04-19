@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
-	<Button android:id="@+id/get_card_button" android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:text="GetCard" />
-	<TextView android:id="@+id/card_number" android:layout_width="wrap_content" android:layout_height="fill_parent"
-		android:text="Card Number" />
-	<TextView android:id="@+id/card_title" android:layout_width="wrap_content" android:layout_height="fill_parent"
-		android:text="Card Title" />
+	android:layout_width="fill_parent" android:layout_height="fill_parent" android:background="@color/card_background">
+	<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:background="@color/card_header_background">
+		<TextView android:id="@+id/card_number" android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/card_number" android:textStyle="bold" android:text="CARD NUMBER" />
+		<TextView android:id="@+id/card_title" android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:textColor="@color/card_title" android:textSize="20sp" android:padding="6sp" android:textStyle="bold"
+			android:text="CARD TITLE" />
+	</LinearLayout>
+	<TextView android:id="@+id/card_description" android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:textColor="@color/card_description" android:text="CARD DESCRIPTION" />
+	<TableLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:background="@color/card_properties_background" android:stretchColumns="*">
+		<TableRow>
+			<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:textColor="@color/card_property"
+				android:text="Assignee" />
+			<TextView android:id="@+id/card_assignee" android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:textColor="@color/card_property_value" android:text="ASSIGNEE NAME" />
+		</TableRow>
+	</TableLayout>
 </LinearLayout>

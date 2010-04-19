@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.thoughtworks.mingle.Constants;
 import com.thoughtworks.mingle.converters.AuthorConverter;
 import com.thoughtworks.mingle.converters.CardConverter;
+import com.thoughtworks.mingle.converters.CardPropertiesConverter;
 import com.thoughtworks.mingle.converters.CardTypeConverter;
 import com.thoughtworks.mingle.converters.MurmurConverter;
 import com.thoughtworks.mingle.converters.MurmursConverter;
@@ -22,6 +23,7 @@ import com.thoughtworks.mingle.converters.ProjectConverter;
 import com.thoughtworks.mingle.converters.ProjectsConverter;
 import com.thoughtworks.mingle.domain.Author;
 import com.thoughtworks.mingle.domain.Card;
+import com.thoughtworks.mingle.domain.CardProperties;
 import com.thoughtworks.mingle.domain.CardType;
 import com.thoughtworks.mingle.domain.Murmur;
 import com.thoughtworks.mingle.domain.Murmurs;
@@ -64,8 +66,10 @@ public class MingleClient {
 
 		xstream.registerConverter(new CardConverter());
 		xstream.registerConverter(new CardTypeConverter());
+		xstream.registerConverter(new CardPropertiesConverter());
 		xstream.alias("card", Card.class);
 		xstream.alias("card_type", CardType.class);
+		xstream.alias("properties", CardProperties.class);
 
 		return (Card) xstream.fromXML(response);
 	}

@@ -16,6 +16,14 @@ public final class R {
     }
     public static final class color {
         public static final int background=0x7f060000;
+        public static final int card_background=0x7f060003;
+        public static final int card_description=0x7f060005;
+        public static final int card_header_background=0x7f060009;
+        public static final int card_number=0x7f060006;
+        public static final int card_properties_background=0x7f06000a;
+        public static final int card_property=0x7f060007;
+        public static final int card_property_value=0x7f060008;
+        public static final int card_title=0x7f060004;
         public static final int murmurs_background=0x7f060001;
         public static final int text=0x7f060002;
     }
@@ -24,16 +32,17 @@ public final class R {
         public static final int mingle_icon=0x7f020001;
     }
     public static final class id {
-        public static final int about_button=0x7f090006;
+        public static final int about_button=0x7f090007;
         public static final int about_content=0x7f090000;
-        public static final int card_button=0x7f090004;
-        public static final int card_number=0x7f090002;
-        public static final int card_title=0x7f090003;
-        public static final int change_project=0x7f090009;
-        public static final int exit_button=0x7f090007;
-        public static final int get_card_button=0x7f090001;
-        public static final int murmurs_button=0x7f090005;
-        public static final int settings=0x7f090008;
+        public static final int card_assignee=0x7f090004;
+        public static final int card_button=0x7f090005;
+        public static final int card_description=0x7f090003;
+        public static final int card_number=0x7f090001;
+        public static final int card_title=0x7f090002;
+        public static final int change_project=0x7f09000a;
+        public static final int exit_button=0x7f090008;
+        public static final int murmurs_button=0x7f090006;
+        public static final int settings=0x7f090009;
     }
     public static final class layout {
         public static final int about=0x7f030000;
