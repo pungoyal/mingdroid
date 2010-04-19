@@ -20,5 +20,4 @@ public class PreferenceChangeListener implements OnPreferenceChangeListener {
 		editor.putString(preference.getKey(), (String) newValue);
 		return editor.commit();
 	}
-
 }

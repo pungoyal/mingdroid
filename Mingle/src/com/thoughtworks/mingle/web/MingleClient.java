@@ -41,6 +41,7 @@ public class MingleClient {
 	private String server;
 	private String project;
 	private final Context context;
+	private String protocol;
 
 	public MingleClient(Context context) {
 		this.context = context;
@@ -48,9 +49,9 @@ public class MingleClient {
 
 		String username = preferences.getString(Constants.USERNAME_KEY, "puneet");
 		String password = preferences.getString(Constants.PASSWORD_KEY, "puneet");
-
 		server = preferences.getString(Constants.SERVER_KEY, "10.0.2.2");
 		project = preferences.getString(Constants.PROJECT_KEY, "mxl");
+		protocol = preferences.getString(Constants.HTTPS_KEY, "http://");
 
 		HttpParams httpParameters = new BasicHttpParams();
 		HttpConnectionParams.setConnectionTimeout(httpParameters, 3000);
@@ -65,7 +66,7 @@ public class MingleClient {
 	public Projects getProjects() throws IOException {
 		checkAlive();
 
-		String url = "http://" + server + ":8080/api/v2/projects.xml";
+		String url = protocol + server + ":8080/api/v2/projects.xml";
 
 		String response = getResponseXML(url);
 		if ("".equals(response))
@@ -80,7 +81,7 @@ public class MingleClient {
 	}
 
 	public Murmurs getMurmurs() {
-		String url = "http://" + server + ":8080/api/v2/projects/" + project + "/murmurs.xml";
+		String url = protocol + server + ":8080/api/v2/projects/" + project + "/murmurs.xml";
 
 		String response = getResponseXML(url);
 		if ("".equals(response))
@@ -97,7 +98,8 @@ public class MingleClient {
 	}
 
 	public boolean checkAlive() throws IOException {
-		HttpGet request = createRequest("http://" + server + ":8080/");
+
+		HttpGet request = createRequest(protocol + server + ":8080/");
 		client.execute(request);
 		releaseConnections();
 		return true;

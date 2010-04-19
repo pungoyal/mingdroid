@@ -1,8 +1,10 @@
 package com.thoughtworks.mingle.preferences;
 
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.Preference.OnPreferenceChangeListener;
 
 import com.thoughtworks.mingle.Constants;
 import com.thoughtworks.mingle.R;
@@ -14,13 +16,19 @@ public class ConnectionPreferences extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings);
 
-		EditTextPreference serverPreference = (EditTextPreference) findPreference(Constants.SERVER_KEY);
-		serverPreference.setOnPreferenceChangeListener(new PreferenceChangeListener(this));
+		PreferenceChangeListener preferenceChangeListener = new PreferenceChangeListener(this);
+		findPreference(Constants.HTTPS_KEY).setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				Editor editor = getSharedPreferences(Constants.APPLICATION_KEY, 0).edit();
+				Boolean https = (Boolean) newValue;
 
-		EditTextPreference username = (EditTextPreference) findPreference(Constants.USERNAME_KEY);
-		username.setOnPreferenceChangeListener(new PreferenceChangeListener(this));
-
-		EditTextPreference password = (EditTextPreference) findPreference(Constants.PASSWORD_KEY);
-		password.setOnPreferenceChangeListener(new PreferenceChangeListener(this));
+				String protocol = https ? "https://" : "http://";
+				editor.putString(preference.getKey(), protocol);
+				return editor.commit();
+			}
+		});
+		findPreference(Constants.SERVER_KEY).setOnPreferenceChangeListener(preferenceChangeListener);
+		findPreference(Constants.USERNAME_KEY).setOnPreferenceChangeListener(preferenceChangeListener);
+		findPreference(Constants.PASSWORD_KEY).setOnPreferenceChangeListener(preferenceChangeListener);
 	}
 }

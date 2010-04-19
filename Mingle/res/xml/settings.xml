@@ -2,6 +2,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<PreferenceCategory android:key="@string/connection_key"
 		android:title="@string/connection_title" android:summary="@string/connection_summary">
+		<CheckBoxPreference android:key="@string/https_key"
+			android:title="@string/https_title" android:summary="@string/https_summary" />
 		<EditTextPreference android:key="@string/user_key"
 			android:title="@string/user_title" android:summary="@string/user_summary" />
 		<EditTextPreference android:key="@string/password_key"

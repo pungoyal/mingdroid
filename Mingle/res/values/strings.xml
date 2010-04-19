@@ -21,6 +21,9 @@
 	<string name="project_prefs_title">Project</string>
 	<string name="project_prefs_summary">Project related preferences</string>
 
+	<string name="https_key">https</string>
+	<string name="https_title">Use HTTPS?</string>
+	<string name="https_summary">Select if your server is behind HTTPS</string>
 	<string name="user_key">user</string>
 	<string name="user_title">Username</string>
 	<string name="user_summary">Your username</string>
