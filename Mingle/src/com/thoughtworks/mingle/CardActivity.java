@@ -27,5 +27,8 @@ public class CardActivity extends Activity {
 		TextView assignee = (TextView) findViewById(R.id.card_assignee);
 		assignee.setText(card.getAssignee());
 
+		TextView status = (TextView) findViewById(R.id.card_status);
+		status.setText(card.getStatus());
+
 	}
 }

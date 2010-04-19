@@ -15,9 +15,15 @@
 		android:background="@color/card_properties_background" android:stretchColumns="*">
 		<TableRow>
 			<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:textColor="@color/card_property"
-				android:text="Assignee" />
+				android:text="Assignee:" />
 			<TextView android:id="@+id/card_assignee" android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:textColor="@color/card_property_value" android:text="ASSIGNEE NAME" />
+		</TableRow>
+		<TableRow>
+			<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:textColor="@color/card_property"
+				android:text="Status:" />
+			<TextView android:id="@+id/card_status" android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:textColor="@color/card_property_value" android:text="STATUS VALUE" />
 		</TableRow>
 	</TableLayout>
 </LinearLayout>

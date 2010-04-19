@@ -25,6 +25,10 @@ public class CardPropertiesConverter implements Converter {
 					reader.moveDown();
 					properties.setAssignee(reader.getValue());
 					reader.moveUp();
+				} else if ("name".equals(reader.getNodeName()) && "Status".equals(reader.getValue())) {
+					reader.moveUp();
+					reader.moveDown();
+					properties.setStatus(reader.getValue());
 				}
 				reader.moveUp();
 			}

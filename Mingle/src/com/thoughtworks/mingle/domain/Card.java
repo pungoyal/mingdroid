@@ -39,10 +39,6 @@ public class Card {
 		return properties;
 	}
 
-	public String getAssignee() {
-		return properties.getAssignee();
-	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -52,9 +48,17 @@ public class Card {
 	}
 
 	public String getShortDescription() {
-		if (description.length() < 100)
+		if (description.length() < 150)
 			return description;
-		return description.substring(0, 100) + "....";
+		return description.substring(0, 150) + "....";
+	}
+
+	public String getAssignee() {
+		return properties.getAssignee();
+	}
+
+	public String getStatus() {
+		return properties.getStatus();
 	}
 
 }

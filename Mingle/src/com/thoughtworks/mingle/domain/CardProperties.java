@@ -11,4 +11,12 @@ public class CardProperties extends HashMap<String, String> {
 	public void setAssignee(String assignee) {
 		put("assignee", assignee);
 	}
+
+	public String getStatus() {
+		return get("status");
+	}
+
+	public void setStatus(String status) {
+		put("status", status);
+	}
 }
