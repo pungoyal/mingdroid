@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
 	android:layout_width="fill_parent" android:layout_height="fill_parent" android:background="@color/card_background">
+	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<EditText android:id="@+id/get_card_number" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:inputType="number" android:text="enter card number" android:textColor="@color/dummy_text" android:cursorVisible="false" />
+		<Button android:id="@+id/get_card_button" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="@string/get_card_button_label" />
+	</LinearLayout>
+
 	<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
 		android:background="@color/card_header_background">
 		<TextView android:id="@+id/card_number" android:layout_width="fill_parent" android:layout_height="wrap_content"

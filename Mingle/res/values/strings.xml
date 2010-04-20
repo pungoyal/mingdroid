@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">Mindroid</string>
+	<string name="app_name">Mingdroid</string>
 	<string name="main_title">Thoughtworks Mingle</string>
+
 	<string name="card_label">View a card</string>
 	<string name="murmurs_label">Murmurs</string>
 	<string name="about_label">About</string>
 	<string name="exit_label">Exit</string>
+	
+	<string name="get_card_button_label">Get</string>
+	<string name="card_refresh_label">Refresh</string>
+	<string name="open_card_label">Open...</string>
 
 	<string name="settings_label">Settings...</string>
 	<string name="settings_title">Minmurs settings</string>
@@ -50,7 +55,8 @@
 		Mingle is a ground breaking agile project
 		management tool from ThoughtWorks Studios.
 
-		This app connects to your
+		This app
+		connects to your
 		mingle instance to
 		see what the people have been
 		murmuring about.
