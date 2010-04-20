@@ -22,25 +22,22 @@ public class CardPropertiesConverter implements Converter {
 				if ("name".equals(reader.getNodeName()) && "Assignee".equals(reader.getValue())) {
 					reader.moveUp();
 					reader.moveDown();
-					// String attribute = reader.getAttribute("nil");
-					// if ("true".equals(attribute)) {
-					// properties.setAssignee("NOT SET");
-					// break;
-					// }
+					String attribute = reader.getAttribute("nil");
+					if ("true".equals(attribute)) {
+						properties.setAssignee("NOT SET");
+						break;
+					}
 					reader.moveDown();
 					properties.setAssignee(reader.getValue());
 					reader.moveUp();
 				} else if ("name".equals(reader.getNodeName()) && "Status".equals(reader.getValue())) {
 					reader.moveUp();
-					// String attribute = reader.getAttribute("nil");
-					// if ("true".equals(attribute)) {
-					// properties.setStatus("NOT SET");
-					// reader.moveDown();
-					// break;
-					// }
-
 					reader.moveDown();
-					properties.setStatus(reader.getValue());
+					String attribute = reader.getAttribute("nil");
+					if ("true".equals(attribute))
+						properties.setStatus("NOT SET");
+					else
+						properties.setStatus(reader.getValue());
 				}
 				reader.moveUp();
 			}
