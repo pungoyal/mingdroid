@@ -1,6 +1,7 @@
 package com.thoughtworks.mingle.web;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -125,8 +126,11 @@ public class MingleClient {
 				buffer.append(line + line_separator);
 			}
 			connection.disconnect();
+		} catch (FileNotFoundException e) {
+			Toast.makeText(context, "Requested resource does not exist in mingle.", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
 		} catch (IOException e) {
-			Toast.makeText(context, "Server cannot be reached. Try again!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "Server cannot be reached. Try again.", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 		}
 		return buffer.toString();

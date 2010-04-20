@@ -48,7 +48,7 @@ public class CardActivity extends Activity {
 		Card card = mingleClient.getCard(cardNumber);
 
 		TextView number = (TextView) findViewById(R.id.card_number);
-		number.setText(card.getType().getName() + " #" + cardNumber);
+		number.setText(card.getTypeName() + " #" + cardNumber);
 		TextView name = (TextView) findViewById(R.id.card_title);
 		name.setText(card.getName());
 

@@ -9,4 +9,9 @@ public class Constants {
 	public static final String PROJECT_KEY = "project";
 	public static final String PORT_KEY = "port";
 
+	/*
+	 * XML tags
+	 */
+	public static final String ASSIGNEE = "assignee";
+	public static final String STATUS = "status";
 }

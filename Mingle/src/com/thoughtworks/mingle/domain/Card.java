@@ -3,9 +3,9 @@ package com.thoughtworks.mingle.domain;
 public class Card {
 	private int number;
 	private String name;
-	private String description;
-	private CardType type;
-	private CardProperties properties;
+	private String description = "";
+	private CardType type = new CardType();
+	private CardProperties properties = new CardProperties();
 
 	public void setNumber(int number) {
 		this.number = number;
@@ -61,4 +61,7 @@ public class Card {
 		return properties.getStatus();
 	}
 
+	public String getTypeName() {
+		return type.getName();
+	}
 }
