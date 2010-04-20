@@ -4,7 +4,7 @@ public class Card {
 	private int number;
 	private String name;
 	private String description = "";
-	private CardType type = new CardType();
+	private String type = "";
 	private CardProperties properties = new CardProperties();
 
 	public void setNumber(int number) {
@@ -21,14 +21,6 @@ public class Card {
 
 	public String getName() {
 		return name;
-	}
-
-	public void setType(CardType type) {
-		this.type = type;
-	}
-
-	public CardType getType() {
-		return type;
 	}
 
 	public void setProperties(CardProperties properties) {
@@ -61,7 +53,12 @@ public class Card {
 		return properties.getStatus();
 	}
 
-	public String getTypeName() {
-		return type.getName();
+	public void setType(String type) {
+		this.type = type;
 	}
+
+	public String getType() {
+		return type;
+	}
+
 }

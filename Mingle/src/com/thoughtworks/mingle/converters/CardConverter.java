@@ -2,7 +2,6 @@ package com.thoughtworks.mingle.converters;
 
 import com.thoughtworks.mingle.domain.Card;
 import com.thoughtworks.mingle.domain.CardProperties;
-import com.thoughtworks.mingle.domain.CardType;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
@@ -22,8 +21,9 @@ public class CardConverter implements Converter {
 			if ("name".equals(reader.getNodeName())) {
 				card.setName(reader.getValue());
 			} else if ("card_type".equals(reader.getNodeName())) {
-				CardType type = (CardType) context.convertAnother(card, CardType.class);
-				card.setType(type);
+				reader.moveDown();
+				card.setType(reader.getValue());
+				reader.moveUp();
 			} else if ("properties".equals(reader.getNodeName())) {
 				CardProperties properties = (CardProperties) context.convertAnother(card, CardProperties.class);
 				card.setProperties(properties);

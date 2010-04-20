@@ -1,4 +1,5 @@
 package com.thoughtworks.mingle.converters;
+
 import com.thoughtworks.mingle.domain.Author;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
