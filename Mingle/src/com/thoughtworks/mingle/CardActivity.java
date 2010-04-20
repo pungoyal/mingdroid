@@ -1,17 +1,17 @@
 package com.thoughtworks.mingle;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Editable;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thoughtworks.mingle.domain.Card;
 import com.thoughtworks.mingle.web.MingleClient;
@@ -22,29 +22,25 @@ public class CardActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.card);
 
-		View cardNumber = findViewById(R.id.get_card_number);
-		cardNumber.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				EditText editText = (EditText) v;
-				editText.selectAll();
-				editText.setTextColor(R.color.card_description);
-			}
-		});
+		showDialog(1);
+	}
 
-		cardNumber.setOnFocusChangeListener(new OnFocusChangeListener() {
-
-			public void onFocusChange(View v, boolean hasFocus) {
-				Toast.makeText(CardActivity.this, "focus changes", Toast.LENGTH_SHORT);
-			}
-		});
-
-		View getCardButton = findViewById(R.id.get_card_button);
-		getCardButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Editable cardNumber = ((EditText) findViewById(R.id.get_card_number)).getText();
-				displayCardProperties(Integer.parseInt(cardNumber.toString()));
-			}
-		});
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		LayoutInflater factory = LayoutInflater.from(this);
+		final View getCardNumberView = factory.inflate(R.layout.card_dialog, null);
+		return new AlertDialog.Builder(this).setTitle(R.string.get_card_title).setView(getCardNumberView)
+				.setPositiveButton(R.string.get_card_ok_label, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						EditText cardNumber = (EditText) getCardNumberView.findViewById(R.id.get_card_number);
+						int number = Integer.parseInt(cardNumber.getText().toString());
+						displayCardProperties(number);
+					}
+				}).setNegativeButton(R.string.get_card_cancel_label, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+					}
+				}).create();
 	}
 
 	private void displayCardProperties(int cardNumber) {

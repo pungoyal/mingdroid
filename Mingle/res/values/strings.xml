@@ -7,8 +7,14 @@
 	<string name="murmurs_label">Murmurs</string>
 	<string name="about_label">About</string>
 	<string name="exit_label">Exit</string>
-	
-	<string name="get_card_button_label">Get</string>
+
+	<!-- get card number dialog	-->
+	<string name="get_card_title">Which card?</string>
+	<string name="get_card_label">Enter the card # to fetch</string>
+	<string name="get_card_ok_label">Go fetch</string>
+	<string name="get_card_cancel_label">Cancel</string>
+
+	<!-- view card activity -->
 	<string name="card_refresh_label">Refresh</string>
 	<string name="open_card_label">Open...</string>
 

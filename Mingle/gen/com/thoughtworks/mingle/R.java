@@ -33,28 +33,28 @@ public final class R {
         public static final int mingle_icon=0x7f020001;
     }
     public static final class id {
-        public static final int about_button=0x7f09000a;
+        public static final int about_button=0x7f090009;
         public static final int about_content=0x7f090000;
-        public static final int card_assignee=0x7f090006;
-        public static final int card_button=0x7f090008;
-        public static final int card_description=0x7f090005;
-        public static final int card_number=0x7f090003;
-        public static final int card_refresh=0x7f09000c;
-        public static final int card_status=0x7f090007;
-        public static final int card_title=0x7f090004;
-        public static final int change_project=0x7f09000f;
-        public static final int exit_button=0x7f09000b;
-        public static final int get_card_button=0x7f090002;
-        public static final int get_card_number=0x7f090001;
-        public static final int murmurs_button=0x7f090009;
-        public static final int open_card=0x7f09000d;
-        public static final int settings=0x7f09000e;
+        public static final int card_assignee=0x7f090004;
+        public static final int card_button=0x7f090007;
+        public static final int card_description=0x7f090003;
+        public static final int card_number=0x7f090001;
+        public static final int card_refresh=0x7f09000b;
+        public static final int card_status=0x7f090005;
+        public static final int card_title=0x7f090002;
+        public static final int change_project=0x7f09000e;
+        public static final int exit_button=0x7f09000a;
+        public static final int get_card_number=0x7f090006;
+        public static final int murmurs_button=0x7f090008;
+        public static final int open_card=0x7f09000c;
+        public static final int settings=0x7f09000d;
     }
     public static final class layout {
         public static final int about=0x7f030000;
         public static final int card=0x7f030001;
-        public static final int main=0x7f030002;
-        public static final int murmurs=0x7f030003;
+        public static final int card_dialog=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int murmurs=0x7f030004;
     }
     public static final class menu {
         public static final int card_menu=0x7f080000;
@@ -62,50 +62,57 @@ public final class R {
     }
     public static final class string {
         public static final int about_label=0x7f070005;
-        public static final int about_text=0x7f07002c;
-        public static final int about_title=0x7f07002b;
+        public static final int about_text=0x7f07002f;
+        public static final int about_title=0x7f07002e;
         public static final int app_name=0x7f070001;
         public static final int card_label=0x7f070003;
-        public static final int card_page_title=0x7f070029;
-        public static final int card_refresh_label=0x7f070008;
-        public static final int change_project_label=0x7f07000d;
-        public static final int change_project_shortcut=0x7f07000f;
-        public static final int change_project_title=0x7f07000e;
-        public static final int connection_key=0x7f070010;
-        public static final int connection_summary=0x7f070012;
-        public static final int connection_title=0x7f070011;
-        public static final int empty=0x7f07002a;
+        public static final int card_page_title=0x7f07002c;
+        /**  view card activity 
+         */
+        public static final int card_refresh_label=0x7f07000b;
+        public static final int change_project_label=0x7f070010;
+        public static final int change_project_shortcut=0x7f070012;
+        public static final int change_project_title=0x7f070011;
+        public static final int connection_key=0x7f070013;
+        public static final int connection_summary=0x7f070015;
+        public static final int connection_title=0x7f070014;
+        public static final int empty=0x7f07002d;
         public static final int exit_label=0x7f070006;
-        public static final int get_card_button_label=0x7f070007;
-        public static final int https_key=0x7f070016;
-        public static final int https_summary=0x7f070018;
-        public static final int https_title=0x7f070017;
+        public static final int get_card_cancel_label=0x7f07000a;
+        public static final int get_card_label=0x7f070008;
+        public static final int get_card_ok_label=0x7f070009;
+        /**  get card number dialog	
+         */
+        public static final int get_card_title=0x7f070007;
+        public static final int https_key=0x7f070019;
+        public static final int https_summary=0x7f07001b;
+        public static final int https_title=0x7f07001a;
         public static final int main_title=0x7f070002;
         public static final int murmurs_label=0x7f070004;
-        public static final int murmurs_list_title=0x7f070028;
-        public static final int open_card_label=0x7f070009;
-        public static final int password_key=0x7f07001c;
-        public static final int password_summary=0x7f07001e;
-        public static final int password_title=0x7f07001d;
-        public static final int port_key=0x7f070022;
-        public static final int port_summary=0x7f070024;
-        public static final int port_title=0x7f070023;
-        public static final int project_key=0x7f070025;
-        public static final int project_prefs_key=0x7f070013;
-        public static final int project_prefs_summary=0x7f070015;
-        public static final int project_prefs_title=0x7f070014;
-        public static final int project_summary=0x7f070027;
-        public static final int project_title=0x7f070026;
+        public static final int murmurs_list_title=0x7f07002b;
+        public static final int open_card_label=0x7f07000c;
+        public static final int password_key=0x7f07001f;
+        public static final int password_summary=0x7f070021;
+        public static final int password_title=0x7f070020;
+        public static final int port_key=0x7f070025;
+        public static final int port_summary=0x7f070027;
+        public static final int port_title=0x7f070026;
+        public static final int project_key=0x7f070028;
+        public static final int project_prefs_key=0x7f070016;
+        public static final int project_prefs_summary=0x7f070018;
+        public static final int project_prefs_title=0x7f070017;
+        public static final int project_summary=0x7f07002a;
+        public static final int project_title=0x7f070029;
         public static final int projects_url=0x7f070000;
-        public static final int server_key=0x7f07001f;
-        public static final int server_summary=0x7f070021;
-        public static final int server_title=0x7f070020;
-        public static final int settings_label=0x7f07000a;
-        public static final int settings_shortcut=0x7f07000c;
-        public static final int settings_title=0x7f07000b;
-        public static final int user_key=0x7f070019;
-        public static final int user_summary=0x7f07001b;
-        public static final int user_title=0x7f07001a;
+        public static final int server_key=0x7f070022;
+        public static final int server_summary=0x7f070024;
+        public static final int server_title=0x7f070023;
+        public static final int settings_label=0x7f07000d;
+        public static final int settings_shortcut=0x7f07000f;
+        public static final int settings_title=0x7f07000e;
+        public static final int user_key=0x7f07001c;
+        public static final int user_summary=0x7f07001e;
+        public static final int user_title=0x7f07001d;
     }
     public static final class xml {
         public static final int project_settings=0x7f040000;

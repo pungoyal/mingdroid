@@ -21,6 +21,10 @@ public class Mingdroid extends Activity {
 		View cardButton = findViewById(R.id.card_button);
 		cardButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				
+				
+				
+				
 				Intent intent = new Intent(Mingdroid.this, CardActivity.class);
 				startActivity(intent);
 			}
