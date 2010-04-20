@@ -1,4 +1,4 @@
-package com.thoughtworks.mingle;
+package com.thoughtworks.mingle.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
