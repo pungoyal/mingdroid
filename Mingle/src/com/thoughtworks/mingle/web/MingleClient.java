@@ -17,6 +17,7 @@ import com.thoughtworks.mingle.Constants;
 import com.thoughtworks.mingle.converters.AuthorConverter;
 import com.thoughtworks.mingle.converters.CardConverter;
 import com.thoughtworks.mingle.converters.CardPropertiesConverter;
+import com.thoughtworks.mingle.converters.CardTypesConverter;
 import com.thoughtworks.mingle.converters.MurmurConverter;
 import com.thoughtworks.mingle.converters.MurmursConverter;
 import com.thoughtworks.mingle.converters.ProjectConverter;
@@ -24,6 +25,7 @@ import com.thoughtworks.mingle.converters.ProjectsConverter;
 import com.thoughtworks.mingle.domain.Author;
 import com.thoughtworks.mingle.domain.Card;
 import com.thoughtworks.mingle.domain.CardProperties;
+import com.thoughtworks.mingle.domain.CardTypes;
 import com.thoughtworks.mingle.domain.Murmur;
 import com.thoughtworks.mingle.domain.Murmurs;
 import com.thoughtworks.mingle.domain.Project;
@@ -56,6 +58,21 @@ public class MingleClient {
 		port = preferences.getString(Constants.PORT_KEY, "");
 
 		xstream = new XStream();
+	}
+
+	public CardTypes getCardTypes(String type) {
+		String response = executeMQL("type=" + type);
+		if ("".equals(response))
+			return new CardTypes();
+
+		xstream.registerConverter(new CardTypesConverter());
+		xstream.alias("results", CardTypes.class);
+
+		return (CardTypes) xstream.fromXML(response);
+	}
+
+	public String executeMQL(String mql) {
+		return getResponseXML("/projects/" + project + "/cards/execute_mql.xml" + "?mql=" + mql);
 	}
 
 	public Card getCard(int cardNumber) {
