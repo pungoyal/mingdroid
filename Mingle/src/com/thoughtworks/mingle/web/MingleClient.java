@@ -72,7 +72,7 @@ public class MingleClient {
 	}
 
 	public Card getCard(int cardNumber) {
-		String response = getResponseXML("/projects/" + project + "/cards/" + cardNumber + ".xml");
+		String response = getResponseXML("/projects/" + project+"/cards/" + cardNumber + ".xml");
 		if ("".equals(response))
 			return new Card();
 

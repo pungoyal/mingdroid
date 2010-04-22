@@ -11,9 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.thoughtworks.mingle.domain.Card;
+import com.thoughtworks.mingle.tasks.CardAsyncTask;
 import com.thoughtworks.mingle.web.MingleClient;
 
 public class CardActivity extends Activity {
@@ -33,33 +32,17 @@ public class CardActivity extends Activity {
 				.setPositiveButton(R.string.get_card_ok_label, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						EditText cardNumber = (EditText) getCardNumberView.findViewById(R.id.get_card_number);
+
 						int number = Integer.parseInt(cardNumber.getText().toString());
-						displayCardProperties(number);
+						CardAsyncTask task = new CardAsyncTask(CardActivity.this, new MingleClient(CardActivity.this));
+
+						task.execute(number);
 					}
 				}).setNegativeButton(R.string.get_card_cancel_label, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						dialog.dismiss();
 					}
 				}).create();
-	}
-
-	private void displayCardProperties(int cardNumber) {
-		MingleClient mingleClient = new MingleClient(this);
-		Card card = mingleClient.getCard(cardNumber);
-
-		TextView number = (TextView) findViewById(R.id.card_number);
-		number.setText(card.getType() + " #" + cardNumber);
-		TextView name = (TextView) findViewById(R.id.card_title);
-		name.setText(card.getName());
-
-		TextView description = (TextView) findViewById(R.id.card_description);
-		description.setText(card.getShortDescription());
-
-		TextView assignee = (TextView) findViewById(R.id.card_assignee);
-		assignee.setText(card.getAssignee());
-
-		TextView status = (TextView) findViewById(R.id.card_status);
-		status.setText(card.getStatus());
 	}
 
 	@Override
