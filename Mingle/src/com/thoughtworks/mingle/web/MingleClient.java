@@ -11,7 +11,6 @@ import java.net.URL;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.thoughtworks.mingle.Constants;
 import com.thoughtworks.mingle.converters.AuthorConverter;
@@ -30,13 +29,14 @@ import com.thoughtworks.mingle.domain.Murmur;
 import com.thoughtworks.mingle.domain.Murmurs;
 import com.thoughtworks.mingle.domain.Project;
 import com.thoughtworks.mingle.domain.Projects;
+import com.thoughtworks.mingle.exceptions.CardNotFoundException;
+import com.thoughtworks.mingle.exceptions.ServerUnreachableException;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.Base64Encoder;
 
 public class MingleClient {
 	private final XStream xstream;
 	private final Base64Encoder base64Encoder;
-	private final Context context;
 
 	private String server;
 	private String project;
@@ -46,7 +46,6 @@ public class MingleClient {
 	private String port;
 
 	public MingleClient(Context context) {
-		this.context = context;
 		base64Encoder = new Base64Encoder();
 
 		SharedPreferences preferences = context.getSharedPreferences(Constants.APPLICATION_KEY, 0);
@@ -60,7 +59,7 @@ public class MingleClient {
 		xstream = new XStream();
 	}
 
-	public CardTypes getCardTypes(String type) {
+	public CardTypes getCardTypes(String type) throws FileNotFoundException, IOException {
 		String response = executeMQL("type=" + type);
 		if ("".equals(response))
 			return new CardTypes();
@@ -71,34 +70,50 @@ public class MingleClient {
 		return (CardTypes) xstream.fromXML(response);
 	}
 
-	public Card getCard(int cardNumber) {
-		String response = getResponseXML("/projects/" + project + "/cards/" + cardNumber + ".xml");
-		if ("".equals(response))
-			return new Card();
+	public Card getCard(int cardNumber) throws CardNotFoundException {
+		String response = null;
+		try {
+			response = getResponseXML("/projects/" + project + "/cards/" + cardNumber + ".xml");
+			xstream.registerConverter(new CardConverter());
+			xstream.registerConverter(new CardPropertiesConverter());
+			xstream.alias("card", Card.class);
+			xstream.alias("properties", CardProperties.class);
 
-		xstream.registerConverter(new CardConverter());
-		xstream.registerConverter(new CardPropertiesConverter());
-		xstream.alias("card", Card.class);
-		xstream.alias("properties", CardProperties.class);
-
-		return (Card) xstream.fromXML(response);
+			return (Card) xstream.fromXML(response);
+		} catch (Exception e) {
+			throw new CardNotFoundException(cardNumber);
+		}
 	}
 
-	public Projects getProjects() {
-		String response = getResponseXML("/projects.xml");
-		if ("".equals(response))
-			return new Projects();
+	public Projects getProjects() throws ServerUnreachableException {
+		String response;
+		try {
+			response = getResponseXML("/projects.xml");
+			xstream.registerConverter(new ProjectsConverter());
+			xstream.registerConverter(new ProjectConverter());
+			xstream.alias("project", Project.class);
+			xstream.alias("projects", Projects.class);
 
-		xstream.registerConverter(new ProjectsConverter());
-		xstream.registerConverter(new ProjectConverter());
-		xstream.alias("project", Project.class);
-		xstream.alias("projects", Projects.class);
-
-		return (Projects) xstream.fromXML(response);
+			return (Projects) xstream.fromXML(response);
+		} catch (Exception e) {
+			throw new ServerUnreachableException(server);
+		}
 	}
 
+	/*
+	 * TODO put a wait cursor around this
+	 */
 	public Murmurs getMurmurs() {
-		String response = getResponseXML("/projects/" + project + "/murmurs.xml");
+		String response = null;
+		try {
+			response = getResponseXML("/projects/" + project + "/murmurs.xml");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if ("".equals(response))
 			return new Murmurs();
 
@@ -112,40 +127,31 @@ public class MingleClient {
 		return (Murmurs) xstream.fromXML(response);
 	}
 
-	private String getResponseXML(String apiSlug) {
+	private String getResponseXML(String apiSlug) throws IOException {
 		StringBuffer buffer = new StringBuffer();
 
 		HttpURLConnection connection = null;
+		URL u = new URL(constructURL(apiSlug));
+		connection = (HttpURLConnection) u.openConnection();
+		connection.setConnectTimeout(5000);
+		connection.setReadTimeout(5000);
 
-		try {
-			URL u = new URL(constructURL(apiSlug));
-			connection = (HttpURLConnection) u.openConnection();
-			connection.setConnectTimeout(5000);
-			connection.setReadTimeout(5000);
+		String encode = base64Encoder.encode((username + ":" + password).getBytes());
+		connection.addRequestProperty("Authorization", "Basic " + encode);
+		connection.connect();
+		InputStream inputStream = connection.getInputStream();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-			String encode = base64Encoder.encode((username + ":" + password).getBytes());
-			connection.addRequestProperty("Authorization", "Basic " + encode);
-			connection.connect();
-			InputStream inputStream = connection.getInputStream();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-			String line = null;
-			String line_separator = System.getProperty("line.separator");
-			while ((line = reader.readLine()) != null) {
-				buffer.append(line + line_separator);
-			}
-			connection.disconnect();
-		} catch (FileNotFoundException e) {
-			Toast.makeText(context, "Requested resource does not exist in mingle.", Toast.LENGTH_SHORT).show();
-			e.printStackTrace();
-		} catch (IOException e) {
-			Toast.makeText(context, "Server cannot be reached. Try again.", Toast.LENGTH_SHORT).show();
-			e.printStackTrace();
+		String line = null;
+		String line_separator = System.getProperty("line.separator");
+		while ((line = reader.readLine()) != null) {
+			buffer.append(line + line_separator);
 		}
+		connection.disconnect();
 		return buffer.toString();
 	}
 
-	private String executeMQL(String mql) {
+	private String executeMQL(String mql) throws FileNotFoundException, IOException {
 		return getResponseXML("/projects/" + project + "/cards/execute_mql.xml" + "?mql=" + mql);
 	}
 

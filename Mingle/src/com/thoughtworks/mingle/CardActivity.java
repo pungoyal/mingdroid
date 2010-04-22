@@ -11,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.thoughtworks.mingle.tasks.FetchCardTask;
 import com.thoughtworks.mingle.web.MingleClient;
@@ -25,8 +24,7 @@ public class CardActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.card);
 		mingleClient = new MingleClient(this);
-		
-		Toast makeText = Toast.makeText(null, "", Toast.LENGTH_LONG);
+
 		showDialog(1);
 	}
 
