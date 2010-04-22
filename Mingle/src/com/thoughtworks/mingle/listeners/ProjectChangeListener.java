@@ -6,16 +6,13 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 
 import com.thoughtworks.mingle.Constants;
-import com.thoughtworks.mingle.web.MingleClient;
 
 public class ProjectChangeListener implements OnPreferenceChangeListener {
 
 	private final Context context;
-	private final MingleClient mingleClient;
 
-	public ProjectChangeListener(Context context, MingleClient mingleClient) {
+	public ProjectChangeListener(Context context) {
 		this.context = context;
-		this.mingleClient = mingleClient;
 	}
 
 	public boolean onPreferenceChange(Preference preference, Object newValue) {

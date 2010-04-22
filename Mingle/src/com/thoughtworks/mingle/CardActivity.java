@@ -11,8 +11,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.thoughtworks.mingle.tasks.CardAsyncTask;
+import com.thoughtworks.mingle.tasks.FetchCardTask;
 import com.thoughtworks.mingle.web.MingleClient;
 
 public class CardActivity extends Activity {
@@ -24,7 +25,8 @@ public class CardActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.card);
 		mingleClient = new MingleClient(this);
-
+		
+		Toast makeText = Toast.makeText(null, "", Toast.LENGTH_LONG);
 		showDialog(1);
 	}
 
@@ -34,12 +36,10 @@ public class CardActivity extends Activity {
 		final View getCardNumberView = factory.inflate(R.layout.card_dialog, null);
 		return new AlertDialog.Builder(this).setTitle(R.string.get_card_title).setView(getCardNumberView)
 				.setPositiveButton(R.string.get_card_ok_label, new DialogInterface.OnClickListener() {
-
 					public void onClick(DialogInterface dialog, int whichButton) {
 						EditText enteredNumber = (EditText) getCardNumberView.findViewById(R.id.get_card_number);
-
 						cardNumber = Integer.parseInt(enteredNumber.getText().toString());
-						CardAsyncTask task = new CardAsyncTask(CardActivity.this, mingleClient);
+						FetchCardTask task = new FetchCardTask(CardActivity.this, mingleClient);
 						task.execute(cardNumber);
 					}
 				}).setNegativeButton(R.string.get_card_cancel_label, new DialogInterface.OnClickListener() {
@@ -62,7 +62,7 @@ public class CardActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.card_refresh:
-			CardAsyncTask task = new CardAsyncTask(CardActivity.this, mingleClient);
+			FetchCardTask task = new FetchCardTask(CardActivity.this, mingleClient);
 			task.execute(cardNumber);
 
 			return true;

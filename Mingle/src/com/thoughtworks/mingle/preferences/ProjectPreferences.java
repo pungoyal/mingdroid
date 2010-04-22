@@ -2,15 +2,11 @@ package com.thoughtworks.mingle.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import com.thoughtworks.mingle.Constants;
 import com.thoughtworks.mingle.R;
-import com.thoughtworks.mingle.domain.Projects;
-import com.thoughtworks.mingle.listeners.ProjectChangeListener;
+import com.thoughtworks.mingle.tasks.GetProjectTask;
 import com.thoughtworks.mingle.web.MingleClient;
 
 public class ProjectPreferences extends PreferenceActivity {
@@ -22,13 +18,13 @@ public class ProjectPreferences extends PreferenceActivity {
 
 		addPreferencesFromResource(R.xml.project_settings);
 
-		ListPreference projectPreference = (ListPreference) findPreference(Constants.PROJECT_KEY);
-		projectPreference.setOnPreferenceChangeListener(new ProjectChangeListener(this, mingleClient));
+		String displayPreferences = displayPreferences();
 
-		Projects projects = mingleClient.getProjects();
-		projectPreference.setEntries(projects.names());
-		projectPreference.setEntryValues(projects.ids());
+		GetProjectTask task = new GetProjectTask(this, mingleClient, displayPreferences);
+		task.execute();
+	}
 
+	private String displayPreferences() {
 		SharedPreferences preferences = getSharedPreferences(Constants.APPLICATION_KEY, 0);
 		String server = preferences.getString(Constants.SERVER_KEY, "NOT DEFINED!");
 		String port = preferences.getString(Constants.PORT_KEY, "<default>");
@@ -43,9 +39,6 @@ public class ProjectPreferences extends PreferenceActivity {
 		connectionProperties += "\nPassword - " + password;
 		connectionProperties += "\nProject - " + project;
 
-		Toast toast = Toast.makeText(this, connectionProperties, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.show();
-
+		return connectionProperties;
 	}
 }
