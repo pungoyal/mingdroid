@@ -4,6 +4,9 @@ import android.app.ListActivity;
 import android.os.Bundle;
 
 import com.thoughtworks.mingle.adapters.MurmurAdapter;
+import com.thoughtworks.mingle.domain.Murmurs;
+import com.thoughtworks.mingle.exceptions.ServerUnreachableException;
+import com.thoughtworks.mingle.web.MingleClient;
 
 public class MurmursActivity extends ListActivity {
 	@Override
@@ -11,6 +14,16 @@ public class MurmursActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.murmurs);
 
-		setListAdapter(new MurmurAdapter(this));
+		MingleClient client = new MingleClient(this);
+
+		Murmurs murmurs = new Murmurs();
+		try {
+			murmurs = client.getMurmurs();
+		} catch (ServerUnreachableException e) {
+			e.printStackTrace();
+		}
+
+		setListAdapter(new MurmurAdapter(this, murmurs));
+
 	}
 }

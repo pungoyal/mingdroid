@@ -100,31 +100,21 @@ public class MingleClient {
 		}
 	}
 
-	/*
-	 * TODO put a wait cursor around this
-	 */
-	public Murmurs getMurmurs() {
-		String response = null;
+	public Murmurs getMurmurs() throws ServerUnreachableException {
 		try {
-			response = getResponseXML("/projects/" + project + "/murmurs.xml");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String response = getResponseXML("/projects/" + project + "/murmurs.xml");
+			xstream.registerConverter(new MurmursConverter());
+			xstream.registerConverter(new MurmurConverter());
+			xstream.registerConverter(new AuthorConverter());
+			xstream.alias("author", Author.class);
+			xstream.alias("murmur", Murmur.class);
+			xstream.alias("murmurs", Murmurs.class);
+
+			return (Murmurs) xstream.fromXML(response);
+		} catch (Exception e) {
+			throw new ServerUnreachableException(server);
 		}
-		if ("".equals(response))
-			return new Murmurs();
 
-		xstream.registerConverter(new MurmursConverter());
-		xstream.registerConverter(new MurmurConverter());
-		xstream.registerConverter(new AuthorConverter());
-		xstream.alias("author", Author.class);
-		xstream.alias("murmur", Murmur.class);
-		xstream.alias("murmurs", Murmurs.class);
-
-		return (Murmurs) xstream.fromXML(response);
 	}
 
 	private String getResponseXML(String apiSlug) throws IOException {

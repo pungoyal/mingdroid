@@ -1,22 +1,21 @@
 package com.thoughtworks.mingle.adapters;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.thoughtworks.mingle.domain.Murmurs;
 import com.thoughtworks.mingle.views.MurmurView;
-import com.thoughtworks.mingle.web.MingleClient;
 
 public class MurmurAdapter extends BaseAdapter {
 
-	private final Context context;
-	private Murmurs murmurs = new Murmurs();
+	private final Activity activity;
+	private Murmurs murmurs;
 
-	public MurmurAdapter(Context context) {
-		this.context = context;
-		murmurs = getMurmurs();
+	public MurmurAdapter(Activity activity, Murmurs murmurs) {
+		this.activity = activity;
+		this.murmurs = murmurs;
 	}
 
 	public int getCount() {
@@ -32,14 +31,6 @@ public class MurmurAdapter extends BaseAdapter {
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		MurmurView murmurView = new MurmurView(context, murmurs.get(position));
-		return murmurView;
+		return new MurmurView(activity, murmurs.get(position));
 	}
-
-	private Murmurs getMurmurs() {
-		MingleClient client = new MingleClient(context);
-		Murmurs murmurs = client.getMurmurs();
-		return murmurs;
-	}
-
 }
