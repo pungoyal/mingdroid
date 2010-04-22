@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.thoughtworks.mingle.Constants;
 import com.thoughtworks.mingle.R;
 import com.thoughtworks.mingle.domain.Projects;
-import com.thoughtworks.mingle.listeners.PreferenceChangeListener;
+import com.thoughtworks.mingle.listeners.ProjectChangeListener;
 import com.thoughtworks.mingle.web.MingleClient;
 
 public class ProjectPreferences extends PreferenceActivity {
@@ -18,18 +18,13 @@ public class ProjectPreferences extends PreferenceActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		MingleClient mingleClient = new MingleClient(ProjectPreferences.this);
+
 		addPreferencesFromResource(R.xml.project_settings);
 
-	}
-
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-
 		ListPreference projectPreference = (ListPreference) findPreference(Constants.PROJECT_KEY);
-		projectPreference.setOnPreferenceChangeListener(new PreferenceChangeListener(this));
+		projectPreference.setOnPreferenceChangeListener(new ProjectChangeListener(this, mingleClient));
 
-		MingleClient mingleClient = new MingleClient(ProjectPreferences.this);
 		Projects projects = mingleClient.getProjects();
 		projectPreference.setEntries(projects.names());
 		projectPreference.setEntryValues(projects.ids());

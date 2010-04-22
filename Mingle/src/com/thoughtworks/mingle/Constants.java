@@ -14,4 +14,10 @@ public class Constants {
 	 */
 	public static final String ASSIGNEE = "assignee";
 	public static final String STATUS = "status";
+
+	/*
+	 * Data related
+	 */
+	public static final String DATABASE_NAME = "mingdroid.db";
+	public static final int DATABASE_VERSION = 1;
 }

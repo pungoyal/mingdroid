@@ -40,9 +40,9 @@ public class Card {
 	}
 
 	public String getShortDescription() {
-		if (description.length() < 150)
+		if (description.length() < 250)
 			return description;
-		return description.substring(0, 150) + "....";
+		return description.substring(0, 250) + "....";
 	}
 
 	public String getAssignee() {

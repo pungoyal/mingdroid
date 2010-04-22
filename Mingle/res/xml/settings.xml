@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<PreferenceCategory android:key="@string/connection_key"
-		android:title="@string/connection_title" android:summary="@string/connection_summary">
-		<CheckBoxPreference android:key="@string/https_key"
-			android:title="@string/https_title" android:summary="@string/https_summary" />
-		<EditTextPreference android:key="@string/user_key"
-			android:title="@string/user_title" android:summary="@string/user_summary" />
-		<EditTextPreference android:key="@string/password_key"
-			android:title="@string/password_title" android:summary="@string/password_summary" />
-		<EditTextPreference android:key="@string/server_key"
-			android:title="@string/server_title" android:summary="@string/server_summary" />
-		<EditTextPreference android:key="@string/port_key"
-			android:title="@string/port_title" android:summary="@string/port_summary" />
+	<PreferenceCategory android:key="@string/connection_key" android:title="@string/connection_title"
+		android:summary="@string/connection_summary">
+		<CheckBoxPreference android:key="@string/https_key" android:title="@string/https_title"
+			android:summary="@string/https_summary" />
+		<EditTextPreference android:key="@string/user_key" android:title="@string/user_title"
+			android:summary="@string/user_summary" />
+		<EditTextPreference android:key="@string/password_key" android:title="@string/password_title"
+			android:summary="@string/password_summary" />
+		<EditTextPreference android:key="@string/server_key" android:title="@string/server_title"
+			android:summary="@string/server_summary" />
+		<EditTextPreference android:key="@string/port_key" android:title="@string/port_title"
+			android:summary="@string/port_summary" />
 	</PreferenceCategory>
 </PreferenceScreen>

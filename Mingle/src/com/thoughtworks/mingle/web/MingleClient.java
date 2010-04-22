@@ -71,12 +71,8 @@ public class MingleClient {
 		return (CardTypes) xstream.fromXML(response);
 	}
 
-	public String executeMQL(String mql) {
-		return getResponseXML("/projects/" + project + "/cards/execute_mql.xml" + "?mql=" + mql);
-	}
-
 	public Card getCard(int cardNumber) {
-		String response = getResponseXML("/projects/iraqi_youth_project/cards/" + cardNumber + ".xml");
+		String response = getResponseXML("/projects/" + project + "/cards/" + cardNumber + ".xml");
 		if ("".equals(response))
 			return new Card();
 
@@ -147,6 +143,10 @@ public class MingleClient {
 			e.printStackTrace();
 		}
 		return buffer.toString();
+	}
+
+	private String executeMQL(String mql) {
+		return getResponseXML("/projects/" + project + "/cards/execute_mql.xml" + "?mql=" + mql);
 	}
 
 	private String constructURL(String apiSlug) {
