@@ -28,7 +28,6 @@ public class CardAsyncTask extends AsyncTask<Integer, Integer, Card> {
 
 	@Override
 	protected Card doInBackground(Integer... params) {
-		publishProgress(1, 2, 3, 4);
 		return client.getCard(params[0]);
 	}
 

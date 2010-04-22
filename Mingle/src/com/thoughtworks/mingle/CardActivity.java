@@ -16,10 +16,14 @@ import com.thoughtworks.mingle.tasks.CardAsyncTask;
 import com.thoughtworks.mingle.web.MingleClient;
 
 public class CardActivity extends Activity {
+	private int cardNumber;
+	private MingleClient mingleClient;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.card);
+		mingleClient = new MingleClient(this);
 
 		showDialog(1);
 	}
@@ -30,17 +34,18 @@ public class CardActivity extends Activity {
 		final View getCardNumberView = factory.inflate(R.layout.card_dialog, null);
 		return new AlertDialog.Builder(this).setTitle(R.string.get_card_title).setView(getCardNumberView)
 				.setPositiveButton(R.string.get_card_ok_label, new DialogInterface.OnClickListener() {
+
 					public void onClick(DialogInterface dialog, int whichButton) {
-						EditText cardNumber = (EditText) getCardNumberView.findViewById(R.id.get_card_number);
+						EditText enteredNumber = (EditText) getCardNumberView.findViewById(R.id.get_card_number);
 
-						int number = Integer.parseInt(cardNumber.getText().toString());
-						CardAsyncTask task = new CardAsyncTask(CardActivity.this, new MingleClient(CardActivity.this));
-
-						task.execute(number);
+						cardNumber = Integer.parseInt(enteredNumber.getText().toString());
+						CardAsyncTask task = new CardAsyncTask(CardActivity.this, mingleClient);
+						task.execute(cardNumber);
 					}
 				}).setNegativeButton(R.string.get_card_cancel_label, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						dialog.dismiss();
+						CardActivity.this.finish();
 					}
 				}).create();
 	}
@@ -57,8 +62,12 @@ public class CardActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.card_refresh:
+			CardAsyncTask task = new CardAsyncTask(CardActivity.this, mingleClient);
+			task.execute(cardNumber);
+
 			return true;
 		case R.id.open_card:
+			showDialog(1);
 			return true;
 		}
 		return false;
