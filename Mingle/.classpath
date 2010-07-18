@@ -5,5 +5,13 @@
 	<classpathentry kind="lib" path="xpp3_min-1.1.4c.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="/Users/pgoyal/work/android-sdk-mac_86/platforms/android-8/android.jar" sourcepath="/Users/pgoyal/work/android-sdk-mac_86/platforms/android-8/sources">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/Users/pgoyal/work/android-sdk-mac_86/docs/reference"/>
+		</attributes>
+		<accessrules>
+			<accessrule kind="nonaccessible" pattern="com/android/internal/**"/>
+		</accessrules>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
